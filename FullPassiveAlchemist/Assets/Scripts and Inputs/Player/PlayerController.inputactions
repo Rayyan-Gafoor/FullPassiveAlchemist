@@ -30,6 +30,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "PickUpItem",
+                    "type": "Button",
+                    "id": "a8f9af82-96d3-4682-a688-7e25be7c1f5e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "ViewInventory",
                     "type": "Button",
                     "id": "088d2c94-ef95-4296-a7cf-7d6666784599",
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ViewInventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a63d7a6f-ce91-4f97-a2bb-b29a3cfee207",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PickUpItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

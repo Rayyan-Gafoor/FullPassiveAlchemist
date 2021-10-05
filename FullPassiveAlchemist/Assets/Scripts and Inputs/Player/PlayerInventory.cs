@@ -9,10 +9,12 @@ public class PlayerInventory : MonoBehaviour
     public List<GameObject> MyItems = new List<GameObject>();
     public GameObject[] PlayerItems;
     [SerializeField] InputActionReference Inventroykey;
-   
+    [SerializeField] InputActionReference PickUpKey;
+
     public float Open_Close;//close= 0 & open=1;
 
     [SerializeField] GameObject HandBookUI_Handler;
+    public GameObject PickUpText;
     [SerializeField] Text[] ItemAmountListText;
     [SerializeField] int[] ItemAmountList;
 
@@ -20,27 +22,45 @@ public class PlayerInventory : MonoBehaviour
     private void OnEnable()
     {
         Inventroykey.action.Enable();
+        PickUpKey.action.Enable();
     }
     private void OnDisable()
     {
         Inventroykey.action.Disable();
+        PickUpKey.action.Disable();
     }
 
 
     private void Start()
     {
         HandBookUI_Handler.SetActive(false);
+        PickUpText.SetActive(false);
         Open_Close = 0;
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.gameObject.tag== "item")
         {
-            GameObject temp;
-            temp = other.gameObject;
-            AddItem(temp);
+            PickUpText.SetActive(true);
+            if (PickUpKey.action.triggered)
+            {
+                GameObject temp;
+                temp = other.gameObject;
+                AddItem(temp);
+                ItemHandler itemHandler= temp.GetComponent<ItemHandler>();
+                itemHandler.Disable();
+            }
+            
+        }
+        
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "item" || other.gameObject.tag== null)
+        {
+            PickUpText.SetActive(false);
         }
     }
 
@@ -65,7 +85,7 @@ public class PlayerInventory : MonoBehaviour
                 result += "\n "+ temp.ToString() ;
                 
             }
-            ListCheck();
+          //  ListCheck();
           
 
             Debug.Log(result);
